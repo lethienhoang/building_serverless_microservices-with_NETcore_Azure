@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "FunctionApp.Discounts": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7247",
+      "launchBrowser": false
+    }
+  }
+}

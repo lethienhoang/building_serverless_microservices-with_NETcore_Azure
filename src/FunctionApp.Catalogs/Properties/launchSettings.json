@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "FuncitonApp.Catalogs": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 5001",
+      "launchBrowser": true
+    }
+  }
+}
