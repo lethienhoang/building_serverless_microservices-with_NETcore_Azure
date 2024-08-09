@@ -1,6 +1,3 @@
 namespace FunctionApp.Catalogs.Dtos;
 
-public record CreateProductDto
-{
-    public string Id { get; set; }
-}
+public record CreateProductDto(Guid Id);
