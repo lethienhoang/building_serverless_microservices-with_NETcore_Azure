@@ -1,4 +1,5 @@
 using FunctionApp.Catalogs.Commands.Products;
+using FunctionApp.Catalogs.Queries.Products;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +37,7 @@ namespace FunctionApp.Catalogs
             }
             catch (Exception e)
             {
-                var error = $"GetTrips failed: {e.Message}";
+                var error = $"CreateProduct failed: {e.Message}";
                 _logger.LogError(error);
                 return new BadRequestObjectResult(error);
             }
@@ -44,23 +45,34 @@ namespace FunctionApp.Catalogs
 
         //TODO do this new method later
         [Function("GetProductById")]
-        public async Task<IActionResult> GetProductByIdAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "product/{id}")] HttpRequest req, Guid id)
+        public IActionResult GetProductById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "product/{id}")] HttpRequest req, Guid id)
         {
-            _logger.LogInformation("Create new product triggered...");
+            _logger.LogInformation("Get product by id triggered...");
             try
             {
-                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-                var reqProduct = JsonConvert.DeserializeObject<CreateProductCommand>(requestBody);
-                if (reqProduct is null)
-                {
-                    return new BadRequestObjectResult("Not found: request body");
-                }
-                var result = _sender.Send(reqProduct);
+                var result = _sender.Send(new GetProductByIdQuery(id));
                 return new OkObjectResult(result);
             }
             catch (Exception e)
             {
-                var error = $"GetTrips failed: {e.Message}";
+                var error = $"GetProductById failed: {e.Message}";
+                _logger.LogError(error);
+                return new BadRequestObjectResult(error);
+            }
+        }
+
+        [Function("GetAllProducts")]
+        public IActionResult GetAllProducts([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "product/?pageNumber={pageNumber}&pageSize={pageSize}")] HttpRequest req, int pageNumber = 1, int pageSize = 10)
+        {
+            _logger.LogInformation("Get all product with paging triggered...");
+            try
+            {
+                var result = _sender.Send(new GetProductsQuery(pageNumber, pageSize));
+                return new OkObjectResult(result);
+            }
+            catch (Exception e)
+            {
+                var error = $"GetAllProducts failed: {e.Message}";
                 _logger.LogError(error);
                 return new BadRequestObjectResult(error);
             }
