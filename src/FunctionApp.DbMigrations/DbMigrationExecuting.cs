@@ -22,25 +22,29 @@ public static class DbMigrationExecuting
         await ExecuteSqlAsync(pathFilesBeFilter);
         Console.WriteLine("End executing script....");
     }
-    
+
     private static async Task<IEnumerable<SchemaMigrationHistoryModel>> GetHistoryMigrationBeExecutedAsync()
     {
         using (var connection = new SqlConnection(Environment.GetEnvironmentVariable("SConnectionString")))
         {
             await connection.OpenAsync();
-        
+            var hasExistTable = await connection.QueryAsync<object>("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'SCHEMA_MIGRATION_HISTORY'");
+            if (hasExistTable is null)
+            {
+                return Enumerable.Empty<SchemaMigrationHistoryModel>();
+            }
             var schemaMigrationHistoryList = await connection.QueryAsync<SchemaMigrationHistoryModel>("SELECT * FROM SCHEMA_MIGRATION_HISTORY");
 
             return schemaMigrationHistoryList;
         }
     }
-    
+
     private static async Task ExecuteSqlAsync(string[] pathFiles)
     {
         using (var connection = new SqlConnection(Environment.GetEnvironmentVariable("SConnectionString")))
         {
             await connection.OpenAsync();
-        
+
             using (var transaction = await connection.BeginTransactionAsync())
             {
                 try
@@ -56,13 +60,13 @@ public static class DbMigrationExecuting
                                 new { Name = curPathFile, Version = version, CreatedDate = DateTime.UtcNow },
                                 transaction: transaction);
                         }
-                        
+
                         string sqlRaw = File.ReadAllText(curPathFile);
                         await connection.ExecuteAsync(
                             sqlRaw,
                             transaction: transaction);
                     }
-                
+
                     await transaction.CommitAsync();
                 }
                 catch
