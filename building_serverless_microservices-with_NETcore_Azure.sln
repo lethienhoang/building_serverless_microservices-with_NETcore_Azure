@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp.Discounts", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp.Orders", "src\FunctionApp.Orders\FunctionApp.Orders.csproj", "{81A29688-1C02-4EC0-9954-BD773911F804}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp.DbMigrations", "src\FunctionApp.DbMigrations\FunctionApp.DbMigrations.csproj", "{B4B19827-8F58-432F-879C-752F21FB8650}"
+EndProject
 
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{81A29688-1C02-4EC0-9954-BD773911F804}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81A29688-1C02-4EC0-9954-BD773911F804}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81A29688-1C02-4EC0-9954-BD773911F804}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4B19827-8F58-432F-879C-752F21FB8650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B19827-8F58-432F-879C-752F21FB8650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B19827-8F58-432F-879C-752F21FB8650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B19827-8F58-432F-879C-752F21FB8650}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 		{C2BCC13A-020B-4A2A-BD09-70B64B21E5F1} = {FD5C71D1-179A-4B2B-B903-365B430B26D1}
 		{718C570E-6DC8-42DD-BB35-441EDC9354DC} = {FD5C71D1-179A-4B2B-B903-365B430B26D1}
 		{81A29688-1C02-4EC0-9954-BD773911F804} = {FD5C71D1-179A-4B2B-B903-365B430B26D1}
+		{B4B19827-8F58-432F-879C-752F21FB8650} = {FD5C71D1-179A-4B2B-B903-365B430B26D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {918D47FF-B8BB-4210-9831-ABFA2E698456}
