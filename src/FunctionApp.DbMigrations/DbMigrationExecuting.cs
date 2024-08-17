@@ -3,21 +3,27 @@ using Dapper;
 
 namespace FunctionApp.DbMigrations;
 
-public class DbMigrationExecuting
+public static class DbMigrationExecuting
 {
-    public async Task RunAsync()
+    public static async Task RunAsync()
     {
+        Console.WriteLine("Getting files....");
         var path = Path.Combine(Directory.GetCurrentDirectory(), "Scripts");
         var pathFiles = Directory.GetFiles(path);
+        Console.WriteLine("End getting files....");
 
+        Console.WriteLine("Getting list schema has been executing script....");
         var executedList = await GetHistoryMigrationBeExecutedAsync();
         var executedNameFileList = executedList.Select(z => z.Name).ToArray();
         var pathFilesBeFilter = pathFiles.Where(file => executedNameFileList.Contains(file)).ToArray();
+        Console.WriteLine("End Getting list schema has been executing script....");
 
+        Console.WriteLine("Starting executing script....");
         await ExecuteSqlAsync(pathFilesBeFilter);
+        Console.WriteLine("End executing script....");
     }
     
-    private async Task<IEnumerable<SchemaMigrationHistoryModel>> GetHistoryMigrationBeExecutedAsync()
+    private static async Task<IEnumerable<SchemaMigrationHistoryModel>> GetHistoryMigrationBeExecutedAsync()
     {
         using (var connection = new SqlConnection(Environment.GetEnvironmentVariable("SConnectionString")))
         {
@@ -29,7 +35,7 @@ public class DbMigrationExecuting
         }
     }
     
-    private async Task ExecuteSqlAsync(string[] pathFiles)
+    private static async Task ExecuteSqlAsync(string[] pathFiles)
     {
         using (var connection = new SqlConnection(Environment.GetEnvironmentVariable("SConnectionString")))
         {
