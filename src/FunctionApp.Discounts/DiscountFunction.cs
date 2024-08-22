@@ -14,8 +14,29 @@ namespace FunctionApp.Discounts
             _logger = logger;
         }
 
-        [Function("DiscountFunction")]
-        public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
+        [Function("GetDiscount")]
+        public IActionResult GetDiscount([HttpTrigger(AuthorizationLevel.Anonymous, "get" )] HttpRequest req)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            return new OkObjectResult("Welcome to Azure Functions!");
+        }
+
+        [Function("CreateDiscount")]
+        public IActionResult CreateDiscount([HttpTrigger(AuthorizationLevel.Anonymous, "post" )] HttpRequest req)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            return new OkObjectResult("Welcome to Azure Functions!");
+        }
+
+        [Function("UpdateDiscount")]
+        public IActionResult UpdateDiscount([HttpTrigger(AuthorizationLevel.Anonymous, "put" )] HttpRequest req)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            return new OkObjectResult("Welcome to Azure Functions!");
+        }
+
+        [Function("DeleteDiscount")]
+        public IActionResult DeleteDiscount([HttpTrigger(AuthorizationLevel.Anonymous, "delete" )] HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
             return new OkObjectResult("Welcome to Azure Functions!");
