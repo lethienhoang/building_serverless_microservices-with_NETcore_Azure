@@ -32,7 +32,7 @@ namespace FunctionApp.Catalogs
                 {
                     return new BadRequestObjectResult("Not found: request body");
                 }
-                var result = _sender.Send(reqProduct);
+                var result = _sender.Send(reqProduct).Result;
                 return new OkObjectResult(result);
             }
             catch (Exception e)
