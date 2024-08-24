@@ -1,4 +1,6 @@
+using System.Configuration;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -11,13 +13,14 @@ var host = new HostBuilder()
         .AddJsonFile("local.settings.json", optional: true, reloadOnChange: false)
         .AddEnvironmentVariables();
     })
-    .ConfigureServices(services =>
+    .ConfigureServices((context, services) =>
     {
+        var configuration = context.Configuration;
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
-        services.addDbContext<AppDbContext>(option =>
+        services.AddDbContext<AppDbContext>(option =>
         {
-            option.UseSqlServer(Configuration.GetConnectionString("DbConnectionString").ToString());
+            option.UseSqlServer(configuration.GetConnectionString("DbConnectionString").ToString());
         });
     })
     .Build();

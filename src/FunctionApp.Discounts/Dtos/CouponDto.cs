@@ -1,0 +1,1 @@
+public record CouponDto(Guid Id, string ProductName, string Description, int Amount);

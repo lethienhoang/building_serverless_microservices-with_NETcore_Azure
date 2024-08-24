@@ -1,10 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+
 public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
         Database.EnsureCreated();
     }
-    public DbSet<Coupon> Products { get; set; }
+    public DbSet<Coupon> Coupons { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Coupon>().HasKey(p => p.Id);
