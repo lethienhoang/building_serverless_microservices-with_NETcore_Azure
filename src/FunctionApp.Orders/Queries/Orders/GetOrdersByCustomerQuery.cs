@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FunctionApp.Orders.Dtos;
+using MediatR;
 
 namespace FunctionApp.Orders.Queries.Orders
 {
-    public class GetOrdersByCustomerQuery
-    {
-        
-    }
+    public record GetOrdersByCustomerQuery(Guid CustomerId)
+    : IRequest<GetOrdersByCustomerResult>;
+
+    public record GetOrdersByCustomerResult(IEnumerable<OrderDto> Orders);
 }

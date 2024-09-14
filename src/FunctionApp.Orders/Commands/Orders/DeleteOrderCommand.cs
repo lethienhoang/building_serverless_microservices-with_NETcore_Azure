@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MediatR;
 
 namespace FunctionApp.Orders.Commands.Orders
 {
     public record DeleteOrderCommand(Guid OrderId)
-    : ICommand<DeleteOrderResult>;
+    : IRequest<DeleteOrderResult>;
 
-public record DeleteOrderResult(bool IsSuccess);
+    public record DeleteOrderResult(bool IsSuccess);
 }
