@@ -15,7 +15,36 @@ namespace FunctionApp.Orders
         }
 
         [Function("OrderFunction")]
-        public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
+        public IActionResult AddOrder([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            return new OkObjectResult("Welcome to Azure Functions!");
+        }
+
+        [Function("OrderFunction")]
+        public IActionResult UpdateOrder([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            return new OkObjectResult("Welcome to Azure Functions!");
+        }
+
+        [Function("OrderFunction")]
+        public IActionResult GetOrders([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            return new OkObjectResult("Welcome to Azure Functions!");
+        }
+
+
+        [Function("OrderFunction")]
+        public IActionResult GetOrdersByName([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            return new OkObjectResult("Welcome to Azure Functions!");
+        }
+
+        [Function("OrderFunction")]
+        public IActionResult GetOrdersByCustomer([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
             return new OkObjectResult("Welcome to Azure Functions!");
