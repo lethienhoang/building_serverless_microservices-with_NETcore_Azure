@@ -19,10 +19,10 @@ namespace FunctionApp.Shared
 
             services.AddDbContext<AppDbContext>((sp, options) =>
             {
-                options.UseSqlServer(connectionString);
+                //options.UseSqlServer(connectionString);
             });
 
-            services.AddScoped<IAppDbContext, AppDbContext>();
+            //services.AddScoped<IAppDbContext, AppDbContext>();
 
             return services;
         }

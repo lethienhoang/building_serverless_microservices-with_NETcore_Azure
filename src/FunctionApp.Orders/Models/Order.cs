@@ -1,3 +1,4 @@
+using FunctionApp.Orders.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,44 +14,44 @@ namespace FunctionApp.Orders.Models
         public Guid Id { get; private set; } = default!;
         public Guid CustomerId { get; private set; } = default!;
         public string OrderName { get; private set; } = default!;
-        // public Address ShippingAddress { get; private set; } = default!;
-        // public Address BillingAddress { get; private set; } = default!;
-        // public Payment Payment { get; private set; } = default!;
-        // public OrderStatus Status { get; private set; } = OrderStatus.Pending;
+        public Address ShippingAddress { get; private set; } = default!;
+        public Address BillingAddress { get; private set; } = default!;
+        public Payment Payment { get; private set; } = default!;
+        public OrderStatus Status { get; private set; } = OrderStatus.Pending;
         public decimal TotalPrice
         {
             get => OrderItems.Sum(x => x.Price * x.Quantity);
             private set { }
         }
 
-        // public static Order Create(Guid id, Guid customerId, string orderName, Address shippingAddress, Address billingAddress, Payment payment)
-        // {
-        //     var order = new Order
-        //     {
-        //         Id = id,
-        //         CustomerId = customerId,
-        //         OrderName = orderName,
-        //         // ShippingAddress = shippingAddress,
-        //         // BillingAddress = billingAddress,
-        //         // Payment = payment,
-        //         // Status = OrderStatus.Pending
-        //     };
+        public static Order Create(Guid id, Guid customerId, string orderName, Address shippingAddress, Address billingAddress, Payment payment)
+        {
+            var order = new Order
+            {
+                Id = id,
+                CustomerId = customerId,
+                OrderName = orderName,
+                ShippingAddress = shippingAddress,
+                BillingAddress = billingAddress,
+                Payment = payment,
+                Status = OrderStatus.Pending
+            };
 
-        //     // order.AddDomainEvent(new OrderCreatedEvent(order));
+            //order.AddDomainEvent(new OrderCreatedEvent(order));
 
-        //     return order;
-        // }
+            return order;
+        }
 
-        // public void Update(string orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status)
-        // {
-        //     OrderName = orderName;
-        //     ShippingAddress = shippingAddress;
-        //     BillingAddress = billingAddress;
-        //     Payment = payment;
-        //     Status = status;
+        public void Update(string orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status)
+        {
+            OrderName = orderName;
+            ShippingAddress = shippingAddress;
+            BillingAddress = billingAddress;
+            Payment = payment;
+            Status = status;
 
-        //     AddDomainEvent(new OrderUpdatedEvent(this));
-        // }
+            //AddDomainEvent(new OrderUpdatedEvent(this));
+        }
 
         public void Add(Guid productId, int quantity, decimal price)
         {
